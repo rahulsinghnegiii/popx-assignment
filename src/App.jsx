@@ -7,10 +7,14 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AccountSettings from './pages/AccountSettings'
 
+// Components
+import Sidebar from './components/Sidebar'
+
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
+        <Sidebar />
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
