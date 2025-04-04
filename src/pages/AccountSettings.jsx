@@ -9,7 +9,7 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 pt-16">
       <header className="bg-white p-4 shadow">
         <h1 className="text-xl font-bold text-gray-800">Account Settings</h1>
       </header>
