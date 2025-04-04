@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
 
   const menuItems = [
     { path: '/', label: 'Welcome' },
@@ -17,11 +12,13 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="relative">
-      {/* Toggle button that's always visible */}
+    <>
+      {/* Toggle button that moves with sidebar */}
       <button
         onClick={toggleSidebar}
-        className="fixed top-4 left-4 z-50 p-2 rounded-full bg-purple-600 text-white shadow-lg hover:bg-purple-700 transition-all duration-300"
+        className={`fixed top-4 z-50 p-2 rounded-full bg-purple-600 text-white shadow-lg hover:bg-purple-700 transition-all duration-300 ${
+          isOpen ? 'left-[17rem]' : 'left-4'
+        }`}
         aria-label="Toggle navigation"
       >
         <svg
@@ -49,9 +46,9 @@ const Sidebar = () => {
         </svg>
       </button>
 
-      {/* Sidebar that shows/hides based on state */}
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transition-transform duration-300 transform z-40 ${
+      {/* Sidebar */}
+      <div 
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-40 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -71,7 +68,7 @@ const Sidebar = () => {
                         ? 'bg-purple-100 text-purple-700 font-medium'
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={toggleSidebar}
                   >
                     {item.label}
                   </Link>
@@ -86,14 +83,14 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Overlay that appears when sidebar is open */}
+      {/* Overlay that appears when sidebar is open on mobile */}
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setIsOpen(false)}
+        <div 
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={toggleSidebar}
         ></div>
       )}
-    </div>
+    </>
   );
 };
 
