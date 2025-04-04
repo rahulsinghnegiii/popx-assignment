@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AccountSettings = () => {
-  // In a real app, this data would come from an API
+  
   const user = {
     name: 'Marry Doe',
     email: 'Marry@Gmail.Com',
